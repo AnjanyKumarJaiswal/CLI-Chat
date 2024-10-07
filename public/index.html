@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <title>Chat App</title>
+    <script src="https://cdn.socket.io/4.8.0/socket.io.min.js"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+<body> 
+  <div class=" flex flex-col bg-csblack scrollbar-hide h-screen w-[100%] items-center font-poppins">
+    <div class="absolute w-[100%] items-center justify-center">
+      <p 
+      class=" mt-[50px]  text-center text-4xl font-bold text-slate-200">
+      CLI Chat App
+    </p>  
+    </div>
+
+    <div  class="absolute flex  bg-matteblack text-xl text-slate-400 h-[65%] w-[55%] justify-center mt-[120px] rounded-2xl">
+      <div  class="relative flex flex-col overflow-y-auto scroll-smooth scrollbar-hide w-[500px]  items-start">
+        <ul id="messages">
+        </ul>
+      </div>
+    </div>
+      <div class="relative h-screen flex items-center justify-center">
+        <div class="absolute bottom-5 flex justify-center">
+          <input
+            id="message"
+            class="text-center border-none outline-none rounded-lg placeholder:text-center h-[40px] w-[500px] mr-4"
+            type="text"
+            placeholder="Enter your Text message...."
+          />
+          <button
+            id="sendbtn"
+            class="border border-blue-900 bg-blue-900 rounded-lg text-slate-100 h-[40px] w-[100px] flex items-center justify-center"
+          >
+            Send
+          </button>
+        </div>
+      </div>
+  </div>
+
+    <script src="./client.js"></script>
+    <script>
+      const userId = '<%= user.id %>'; // Get user ID from EJS
+      const chatId = '<%= chat.id %>'; // Get chat ID from EJS
+    </script>
+</body>
+</html>
