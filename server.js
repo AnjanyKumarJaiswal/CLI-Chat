@@ -58,29 +58,9 @@ app.get('/auth/failure',(req,res)=>{
 })
 
 app.get("/chat", isLoggedIn , async (req,res)=>{
-    try {
-        const user = req.user; // Get the authenticated user from Passport.js
-        const userId = user._id; // Get the MongoDB _id of the user
-
-        // Find or create a chat room (you'll need to implement this logic)
-        // Example: find the chat room associated with the user
-        let chat = await Chat.findOne({ user: userId }); 
-
-        if (!chat) { 
-            // Create a new chat room for the user
-            chat = new Chat({ user: userId }); // Or any other chat room creation logic
-            await chat.save();
-        }
-
-        // Render index.html with user and chat data
-        res.render('index.ejs', { user: user, chat: chat }); 
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal server error');
-    }
-    // res
-    // .status(200)
-    // .sendFile(path.resolve('public' , 'index.html'))
+    res
+    .status(200)
+    .sendFile(path.resolve('public' , 'index.html'))
 })
 
 app.use(Express.static(path.resolve("./public")))

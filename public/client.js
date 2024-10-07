@@ -2,12 +2,11 @@ const socket = io();
 const sendbtn = document.getElementById('sendbtn');
 const messageinput = document.getElementById('message');
 const allmessags = document.getElementById('messages');
-// import { User , Chat } from "../server/models/chat.schema";
 
-socket.on('chatMessage', ({ Messagetext, user, sent }) => {
+
+socket.on('message', (message) => {
     const li = document.createElement('li');
-    const time = new Date(sent).toLocaleTimeString();
-    li.textContent = `${user.displayName} [${time}]: ${Messagetext}`;
+    li.innerText = message
     allmessags.appendChild(li);
 });
 
@@ -18,23 +17,12 @@ messageinput.addEventListener('keydown', (e) => {
     }
 });
 
-function sendMessage() {
+sendbtn.addEventListener('click', (e) => {
     const message = messageinput.value;
+
     if (message) {
         console.log(`message sent: ${message}`);
-        socket.emit('chatMessage', { googleId: userId, chatId: chatId, Messagetext: message });
+        socket.emit('chatMessage', message);
         messageinput.value = '';
     }
-}
-
-// sendbtn.addEventListener('click', (e) => {
-//     const message = messageinput.value;
-
-//     if (message) {
-//         console.log(`message sent: ${message}`);
-//         socket.emit('chatMessage', {  Messagetext: message });
-//         messageinput.value = '';
-//     }
-// });
-
-sendbtn.addEventListener('click', sendMessage);
+});
